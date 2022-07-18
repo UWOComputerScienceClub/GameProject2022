@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal light_body_entered
 signal light_body_exited
 
-export var speed = 200 # How fast the player will move (pixels/sec).
+export var speed = 75 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var velocity = Vector2()
 onready var enemy = get_parent().get_node("Enemy1")
@@ -28,7 +28,11 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-
+	if Input.is_action_pressed("sprint_toggle"):
+		speed = 150
+	else:
+		speed = 75
+		
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 
