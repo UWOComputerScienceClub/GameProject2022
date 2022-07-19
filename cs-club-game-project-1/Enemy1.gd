@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var speed = 50 # How fast the enemy will move (pixels/sec).
 var screen_size # Size of the game window.
 
+var max_health = 100
 var health = 100
 
 var is_in_light = false
@@ -20,9 +21,12 @@ func _ready():
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 func _process(delta):
-	print(health)
-	
-	if is_in_light and PlayerLightEnabled.isLightEnabled and health > 0:
+	#print(health)
+	#print(is_in_light)
+	$HealthDisplay.update_healthbar(health)
+	if (is_in_light and 
+		PlayerLightEnabled.isLightEnabled and 
+		health > 0):
 		health -= 1
 	
 	velocity = Vector2.ZERO # The enemy's movement vector.

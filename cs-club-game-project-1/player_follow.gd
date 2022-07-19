@@ -4,7 +4,7 @@ extends Camera2D
 var player
 
 func _ready():
-	player= get_node("/root/Main/Player")
+	player = get_node("/root/Main/Player")
 	
 
 func _process(delta):
