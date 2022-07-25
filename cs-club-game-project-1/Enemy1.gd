@@ -23,28 +23,26 @@ func _physics_process(delta):
 func _process(delta):
 	#print(health)
 	#print(is_in_light)
+	
 	$HealthDisplay.update_healthbar(health)
+	
 	if (is_in_light and 
 		PlayerLightEnabled.isLightEnabled and 
-		health > 0):
+		health > 0
+		):
 		health -= 1
-	
-	velocity = Vector2.ZERO # The enemy's movement vector.
+
 	if health > 0:
 		if PlayerLightEnabled.isLightEnabled:
 			if player.position.x > position.x:
-				velocity.x += 1
+				position.x += 1
 			if player.position.x < position.x:
-				velocity.x -= 1
+				position.x -= 1
 			if player.position.y > position.y:
-				velocity.y += 1
+				position.y += 1
 			if player.position.y < position.y:
-				velocity.y -= 1
-
-			if velocity.length() > 0:
-				velocity = velocity.normalized() * speed
-
-		position += velocity * delta
+				position.y -= 1
+				
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
 	elif health == 0:

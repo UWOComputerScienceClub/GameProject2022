@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/icon_enemy.png" type="Texture" id=1]
 [ext_resource path="res://Enemy1.gd" type="Script" id=2]
+[ext_resource path="res://HealthDisplay.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=4]
 light_mode = 2
@@ -28,3 +29,7 @@ occluder = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -1 )
+scale = Vector2( 0.5, 1 )

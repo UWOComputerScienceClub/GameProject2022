@@ -15,6 +15,14 @@ func _physics_process(delta):
 	if collision and collision.collider_velocity != Vector2(0,0):
 		position.x = 872
 		position.y = 496
+		
+		
+		
+	var space_state = get_world_2d().direct_space_state
+	if get_parent().has_node("Enemy1"):
+		var result = space_state.intersect_ray(global_position, enemy.position, [self])
+		if (not result.collider_id == 1323):
+			enemy.is_in_light = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -22,7 +30,8 @@ func _ready():
 func _process(delta):
 	#print(PlayerLightEnabled.isLightEnabled)
 	#print(get_node("Light2D/Area2D").overlaps_body(enemy))
-	if get_node("Light2D/Area2D").overlaps_body(enemy) and PlayerLightEnabled.isLightEnabled:
+	if (get_node("Light2D/Area2D").overlaps_body(enemy) and 
+		PlayerLightEnabled.isLightEnabled):
 		enemy.is_in_light = true
 		
 	velocity = Vector2.ZERO # The player's movement vector.
@@ -34,6 +43,7 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		
 	if Input.is_action_pressed("sprint_toggle"):
 		speed = 150
 	else: 
@@ -45,7 +55,7 @@ func _process(delta):
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-
+		
 func _on_Area2D_body_entered(body):
 	if (body != self):
 		emit_signal("light_body_entered")

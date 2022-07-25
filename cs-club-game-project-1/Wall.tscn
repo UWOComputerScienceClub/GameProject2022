@@ -9,7 +9,7 @@ extents = Vector2( 16, 16 )
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
-[node name="Wall" type="StaticBody2D"]
+[node name="Wall" type="StaticBody2D" groups=["Walls"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
