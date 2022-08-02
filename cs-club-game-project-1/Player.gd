@@ -21,8 +21,8 @@ func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state
 	if get_parent().has_node("Enemy1"):
 		var result = space_state.intersect_ray(global_position, enemy.position, [self])
-		if (not result.collider_id == 1323):
-			enemy.is_in_light = false
+		#if (not result.collider_id == 1323):
+			#enemy.is_in_light = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -30,7 +30,7 @@ func _ready():
 func _process(delta):
 	#print(PlayerLightEnabled.isLightEnabled)
 	#print(get_node("Light2D/Area2D").overlaps_body(enemy))
-	if (get_node("Light2D/Area2D").overlaps_body(enemy) and 
+	if (#get_node("Light2D/Area2D").overlaps_body(enemy) and 
 		PlayerLightEnabled.isLightEnabled):
 		enemy.is_in_light = true
 		

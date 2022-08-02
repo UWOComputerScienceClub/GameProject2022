@@ -19,6 +19,5 @@ func _input(event):
 			energy = 1.0
 			scale = Vector2(0.10, 0.15)
 			PlayerLightEnabled.isLightEnabled = false
-
 #func _process(delta):
 #	global_rotation = lerp_angle(global_rotation, get_global_mouse_position().angle(), delta * 2)

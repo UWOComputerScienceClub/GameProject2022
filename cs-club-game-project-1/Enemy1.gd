@@ -22,7 +22,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 func _process(delta):
 	#print(health)
-	#print(is_in_light)
+	print(is_in_light)
 	
 	$HealthDisplay.update_healthbar(health)
 	
