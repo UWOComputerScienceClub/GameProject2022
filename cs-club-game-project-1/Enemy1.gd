@@ -15,14 +15,12 @@ onready var playerLight = get_parent().get_node("Player/Light2D")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	player.connect("light_body_entered", self, "_on_light_body_entered")
-	player.connect("light_body_exited", self, "_on_light_body_exited")
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 func _process(delta):
 	#print(health)
-	print(is_in_light)
+	#print(is_in_light)
 	
 	$HealthDisplay.update_healthbar(health)
 	
@@ -47,9 +45,3 @@ func _process(delta):
 		position.y = clamp(position.y, 0, screen_size.y)
 	elif health == 0:
 		self.queue_free()
-
-func _on_light_body_entered():
-	is_in_light = true
-	
-func _on_light_body_exited():
-	is_in_light = false

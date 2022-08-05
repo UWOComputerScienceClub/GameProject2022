@@ -60,7 +60,4 @@ script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light2D/Area2D"]
 position = Vector2( 16, -6.10352e-05 )
-polygon = PoolVector2Array( -15, 0, -450, -900, 450, -900 )
-
-[connection signal="body_entered" from="Light2D/Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Light2D/Area2D" to="." method="_on_Area2D_body_exited"]
+polygon = PoolVector2Array( -16, 6.10352e-05, -410, -900, 390, -900 )

@@ -3,9 +3,10 @@
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/background.png" type="Texture" id=3]
-[ext_resource path="res://Enemy1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Node.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Wall" parent="." instance=ExtResource( 1 )]
 position = Vector2( -16, 536 )
@@ -27,14 +28,11 @@ scale = Vector2( 64, 1 )
 position = Vector2( 944, 1096 )
 scale = Vector2( 64, 1 )
 
-[node name="Enemy1" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1024, 305 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 872, 496 )
 
 [node name="Shadow" type="Sprite" parent="."]
 modulate = Color( 0.0666667, 0.0666667, 0.0666667, 0.843137 )
-position = Vector2( 888, 448 )
+position = Vector2( 1048, 496 )
 scale = Vector2( 19.1484, 10.7344 )
 texture = ExtResource( 3 )

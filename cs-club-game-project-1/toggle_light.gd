@@ -2,7 +2,7 @@ extends Light2D
 var elapsed = 0.0
 var starting_mouse_pos
 onready var player = get_parent().get_node(".")
-onready var enemy1 = get_parent().get_node("../Enemy1")
+#onready var enemy1 = get_parent().get_node("../Enemy1")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	energy = 1.0
