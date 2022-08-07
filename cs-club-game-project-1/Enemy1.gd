@@ -3,8 +3,8 @@ extends KinematicBody2D
 export var speed = 50 # How fast the enemy will move (pixels/sec).
 var screen_size # Size of the game window.
 
-var max_health = 100
-var health = 100
+var max_health = 100 # Starting health of enemy.
+var health = max_health
 
 var is_in_light = false
 
@@ -14,11 +14,10 @@ onready var playerLight = get_parent().get_node("Player/Light2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-
-func _physics_process(delta):
-	var collision = move_and_collide(velocity * delta)
+	pass
+	
 func _process(delta):
+	# Print statements to be used for testing purposes ONLY. Delete before final release.
 	#print(health)
 	#print(is_in_light)
 	
@@ -27,21 +26,18 @@ func _process(delta):
 	if (is_in_light and 
 		PlayerLightEnabled.isLightEnabled and 
 		health > 0
-		):
-		health -= 1
+		): # If enemy is in player's light and flashlight is on and the enemy's health is above 0...
+		health -= 1 # Decrement enemy health by 1.
 
-	if health > 0:
-		if PlayerLightEnabled.isLightEnabled:
-			if player.position.x > position.x:
-				position.x += 1
-			if player.position.x < position.x:
-				position.x -= 1
-			if player.position.y > position.y:
-				position.y += 1
-			if player.position.y < position.y:
-				position.y -= 1
-				
-		position.x = clamp(position.x, 0, screen_size.x)
-		position.y = clamp(position.y, 0, screen_size.y)
-	elif health == 0:
-		self.queue_free()
+	if PlayerLightEnabled.isLightEnabled: # Move only when player's light is on.
+		if player.position.x > position.x:
+			position.x += 1
+		if player.position.x < position.x:
+			position.x -= 1
+		if player.position.y > position.y:
+			position.y += 1
+		if player.position.y < position.y:
+			position.y -= 1
+
+func _physics_process(delta):
+	var collision = move_and_collide(velocity * delta) # Collide with objects around enemy (e.g. walls).

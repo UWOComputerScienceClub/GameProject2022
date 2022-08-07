@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+# It's a wall.
 
 # Declare member variables here. Examples:
 # var a = 2

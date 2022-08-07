@@ -1,57 +1,44 @@
 extends KinematicBody2D
 
-signal light_body_entered
-signal light_body_exited
-
 export var speed = 75 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
-var velocity = Vector2()
-#var space_state
-#onready var enemy = get_parent().get_node("Enemy1")
+var velocity = Vector2() # The player's movement vector.
 
-func _physics_process(delta):
-	#rotation = lerp_angle(global_rotation, get_global_mouse_position().angle(), delta)
-	look_at(get_global_mouse_position()) 
-	var collision = move_and_collide(velocity * delta)
-	if collision and collision.collider_velocity != Vector2(0,0):
-		position.x = 872
-		position.y = 496
-		
-		
-		
-	var space_state = get_world_2d().direct_space_state
-	#if get_parent().has_node("Enemy1"):
-	#var result = space_state.intersect_ray(global_position, enemy.position, [self])
-		
-		#if (not result.collider_id == 1323):
-		#	enemy.is_in_light = false
-
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-	#space_state = get_world_2d().direct_space_state
+	pass
 	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Print statements to be used for testing purposes ONLY. Delete before final release.
 	#print(PlayerLightEnabled.isLightEnabled)
 	#print(get_node("Light2D/Area2D").overlaps_body(enemy))
 		
-	velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+	velocity = Vector2.ZERO # Set player's movement vector to zero by default
+	
+	if Input.is_action_pressed("move_right"): # If player hits 'D' or Right Arrow on keyboard...
+		velocity.x += 1						  # ...Move player character right.
+	if Input.is_action_pressed("move_left"):  # If player hits 'A' or Left Arrow on keyboard...
+		velocity.x -= 1						  # ...Move player character left.
+	if Input.is_action_pressed("move_down"):  # If player hits 'S' or Down Arrow on keyboard...
+		velocity.y += 1						  # ...Move player character down. (Y-axis is inverted, so '+' means down.)
+	if Input.is_action_pressed("move_up"):	  # If player hits 'W' or Up Arrow on keyboard...
+		velocity.y -= 1						  # ...Move player character up. (Y-axis is inverted, so '-' means up.)
 		
-	if Input.is_action_pressed("sprint_toggle"):
-		speed = 150
-	else: 
-		speed = 75
+	if Input.is_action_pressed("sprint_toggle"): # While player is holding down Shift...
+		speed = 150								 # Player is sprinting.
+	else: 										 # Else...
+		speed = 75								 # Player is walking.
 		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+	if velocity.length() > 0: 					 # If the player is moving...
+		velocity = velocity.normalized() * speed # Set their movement speed accordingly.
 
-	position += velocity * delta
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	position += velocity * delta # Update player position based on moevement speed and the time since the last frame.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame. Physics is synced up with framerate.
+func _physics_process(delta):
+	look_at(get_global_mouse_position()) # Makes player character look at mouse cursor at all times.
+	
+	var collision = move_and_collide(velocity * delta) # Gather info about whether or not player is colliding with anything.
+	if collision and collision.collider_velocity != Vector2(0,0): # If the player is colliding with something non-static (Like, say, an enemy...)
+		position.x = 872										  # Reset player x and y to starting position.
+		position.y = 496
