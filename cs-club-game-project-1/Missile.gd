@@ -1,6 +1,5 @@
-extends StaticBody2D
+extends KinematicBody2D
 
-# It's a wall.
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,8 +10,6 @@ extends StaticBody2D
 func _ready():
 	pass # Replace with function body.
 
-func isWall(): # wull
-	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

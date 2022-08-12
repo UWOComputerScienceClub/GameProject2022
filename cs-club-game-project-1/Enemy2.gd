@@ -1,13 +1,13 @@
-extends KinematicBody2D
+extends StaticBody2D
 
-export var speed = 50 # How fast the enemy will move (pixels/sec).
+export var speed = 0 # How fast the enemy will move (pixels/sec).
 
 var max_health = 100 # Starting health of enemy.
 var health = max_health
 
 var is_in_light = false
 
-var velocity = Vector2()
+var velocity = Vector2(0,0)
 onready var player = get_parent().get_node("Player")
 onready var playerLight = get_parent().get_node("Player/Light2D")
 
@@ -27,16 +27,3 @@ func _process(delta):
 		health > 0
 		): 			# If enemy is in player's light and flashlight is on and the enemy's health is above 0...
 		health -= 1 # Decrement enemy health by 1.
-
-	if PlayerLightEnabled.isLightEnabled: # Move only when player's light is on.
-		if player.position.x > position.x:
-			position.x += 1
-		if player.position.x < position.x:
-			position.x -= 1
-		if player.position.y > position.y:
-			position.y += 1
-		if player.position.y < position.y:
-			position.y -= 1
-
-func _physics_process(delta):
-	var collision = move_and_collide(velocity * delta) # Collide with objects around enemy (e.g. walls).

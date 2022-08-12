@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export var speed = 75 # How fast the player will move (pixels/sec).
 var velocity = Vector2() # The player's movement vector.
+var wall = load("res://Wall.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +40,7 @@ func _physics_process(delta):
 	look_at(get_global_mouse_position()) # Makes player character look at mouse cursor at all times.
 	
 	var collision = move_and_collide(velocity * delta) # Gather info about whether or not player is colliding with anything.
-	if collision and collision.collider_velocity != Vector2(0,0): # If the player is colliding with something non-static (Like, say, an enemy...)
-		position.x = 872										  # Reset player x and y to starting position.
+	if (collision and 
+		not collision.collider.has_method("isWall")): # If the player is colliding with something without isWall() method (Like, say, an enemy...)
+		position.x = 872							  # Reset player x and y to starting position.
 		position.y = 496
