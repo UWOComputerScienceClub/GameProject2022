@@ -2,14 +2,17 @@ extends Node2D
 
 var Enemy1 = load("res://Enemy1.tscn") # Creates Enemy1 resource as a shortcut to Enemy1 scene.
 var Enemy2 = load("res://Enemy2.tscn") # Creates Enemy2 resource as a shortcut to Enemy2 scene.
+var Enemy3 = load("res://Enemy3.tscn") # Creates Enemy3 resource as a shortcut to Enemy3 scene.
 
 var enemy1_array = [] # Stores all enemies in the level (Enemy1)
 var enemy2_array = [] # Stores all enemies in the level (Enemy2)
+var enemy3_array = [] # Stores all enemies in the level (Enemy3)
 
 var rng = RandomNumberGenerator.new() # Random number generator
 
 var total_num_enemies1 = 2 # Number of enemies in the scene
 var total_num_enemies2 = 2 # Number of enemies in the scene
+var total_num_enemies3 = 2 # Number of enemies in the scene
 
 var space_state # See comments on lines 14-15 for info
 onready var player = get_node("Player") # Fetches the player node from the given NodePath.
@@ -49,6 +52,20 @@ func _ready():
 		enemy2_array[n].position.y = rng.randi_range(0, 1000) # Sets the initial y-coordinate of this instance of 
 															  # Enemy2 via a bounded int number generator.
 															
+	for n in total_num_enemies3:
+		enemy3_array.insert(n, Enemy3.instance()) # Inserts an instance of Enemy3 into the array at index value n.
+		
+		add_child(enemy3_array[n]) # Adds this instance of Enemy3 to the Main scene as a child node.
+		
+		rng.randomize()
+		
+		enemy3_array[n].position.x = rng.randi_range(0, 1900) # Sets the initial x-coordinate of this instance of 
+															  # Enemy3 via a bounded int number generator.
+		rng.randomize()										  
+															
+		enemy3_array[n].position.y = rng.randi_range(0, 1000) # Sets the initial y-coordinate of this instance of 
+															  # Enemy3 via a bounded int number generator.
+															
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#pass
@@ -85,7 +102,24 @@ func _process(delta):
 				enemy2_array[n].queue_free()# ...Delete this instance of Enemy2...
 				enemy2_array.remove(n) 		# ...Remove this entry of the array...
 				enemy2_array.insert(n, null)# ...And replace it with a null value.
-				
+	
+	for n in total_num_enemies3:
+		# Print statements to be used for testing purposes ONLY. Delete before final release.
+		#print(n)
+		#print(enemy3_array[n])
+		
+		if enemy3_array[n] != null: # If this instance of Enemy3 has not yet been defeated...
+			if (player_light_area.overlaps_body(enemy3_array[n]) and 
+				PlayerLightEnabled.isLightEnabled): # If this instance of Enemy3 is in the player's light and the light is on...
+				enemy3_array[n].is_in_light = true
+			else:
+				enemy3_array[n].is_in_light = false
+			
+			if enemy3_array[n].health == 0: # If this instance of Enemy3's health reaches 0...
+				enemy3_array[n].queue_free()# ...Delete this instance of Enemy3...
+				enemy3_array.remove(n) 		# ...Remove this entry of the array...
+				enemy3_array.insert(n, null)# ...And replace it with a null value.	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame. Physics is synced up with framerate.
 func _physics_process(delta):
 	pass
