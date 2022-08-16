@@ -4,7 +4,7 @@
 [ext_resource path="res://Wall.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 32, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
@@ -16,6 +16,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="WallSprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 z_index = 1
 texture = ExtResource( 1 )
 

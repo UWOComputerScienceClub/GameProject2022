@@ -29,10 +29,10 @@ position = Vector2( 944, 1096 )
 scale = Vector2( 64, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 872, 496 )
+position = Vector2( 952, 734 )
 
 [node name="Shadow" type="Sprite" parent="."]
 modulate = Color( 0.0666667, 0.0666667, 0.0666667, 0.843137 )
-position = Vector2( 1048, 496 )
+position = Vector2( 984, 536 )
 scale = Vector2( 19.1484, 10.7344 )
 texture = ExtResource( 3 )

@@ -22,8 +22,6 @@ onready var player_light_area = get_node("Player/Light2D/Area2D")
 func _ready():
 	#pass
 	
-	get_tree().change_scene("res://Level1.tscn") # Changes root scene to "Level1"
-	
 	space_state = get_world_2d().direct_space_state # Direct access to the level's physics state. 
 													# Used for detecting collisions.
 	for n in total_num_enemies1:
@@ -125,9 +123,3 @@ func _process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame. Physics is synced up with framerate.
 func _physics_process(delta):
 	pass
-	
-	# WARNING: This section is a WIP. User caution is advised.
-	#var result = space_state.intersect_ray(player.global_position, enemy1.global_position)
-	#print(result)
-	#if (not result.collider_id == 1327):
-	#	enemy1.is_in_light = false
