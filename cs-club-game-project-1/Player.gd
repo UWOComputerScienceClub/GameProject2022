@@ -29,7 +29,7 @@ func _process(delta):
 		speed = 150								 # Player is sprinting.
 	else: 										 # Else...
 		speed = 75								 # Player is walking.
-		
+	
 	if velocity.length() > 0: 					 # If the player is moving...
 		velocity = velocity.normalized() * speed # Set their movement speed accordingly.
 
