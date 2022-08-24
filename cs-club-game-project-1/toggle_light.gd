@@ -10,7 +10,8 @@ func _ready():
 
 # Called when there is an input event (movement, toggling light, etc).
 func _input(event):
-	if Input.is_action_just_pressed("toggle_flashlight"): # If the player presses 'F'...
+	if (Input.is_action_just_pressed("toggle_flashlight") and
+		PlayerLightEnabled.hasFlashlight): # If the player presses 'F'...
 		if energy == 1.0: 							  # If the flashlight is not on...
 			energy = 2.0
 			scale = Vector2(0.25, 0.25)

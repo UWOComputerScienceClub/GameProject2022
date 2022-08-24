@@ -17,7 +17,6 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerLightEnabled="*res://PlayerLightEnabled.tscn"
-HasFlashlight="*res://HasFlashlight.tscn"
 
 [display]
 

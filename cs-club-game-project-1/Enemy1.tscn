@@ -14,7 +14,7 @@ polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Enemy1" type="KinematicBody2D"]
+[node name="Enemy1" type="KinematicBody2D" groups=["Enemies1"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

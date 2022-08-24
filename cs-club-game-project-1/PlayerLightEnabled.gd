@@ -2,6 +2,8 @@ extends Node
 
 var isLightEnabled = false
 
+var hasFlashlight = false
+
 var velocity = Vector2()
 
 # Called when the node enters the scene tree for the first time.

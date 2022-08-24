@@ -29,7 +29,7 @@ func _process(delta):
 		speed = 150								 # Player is sprinting.
 	else: 										 # Else...
 		speed = 75								 # Player is walking.
-	
+		
 	if velocity.length() > 0: 					 # If the player is moving...
 		velocity = velocity.normalized() * speed # Set their movement speed accordingly.
 
@@ -40,7 +40,17 @@ func _physics_process(delta):
 	look_at(get_global_mouse_position()) # Makes player character look at mouse cursor at all times.
 	
 	var collision = move_and_collide(velocity * delta) # Gather info about whether or not player is colliding with anything.
-	if (collision and 
-		not collision.collider.has_method("isWall")): # If the player is colliding with something without isWall() method (Like, say, an enemy...)
-		position.x = 872							  # Reset player x and y to starting position.
-		position.y = 496
+	if (collision):
+		if (not collision.collider.has_method("isWall")): # If the player is colliding with something without isWall() method (Like, say, an enemy...)
+			if (not collision.collider.has_method("isFlashlight")):
+				if (PlayerLightEnabled.hasFlashlight):
+					position.x = 32
+					position.y = 32
+					#position.x = 872							  	  # Reset player x and y to starting position.
+					#position.y = 496
+			else:
+				PlayerLightEnabled.hasFlashlight = true
+				if $Light2D.energy == 1.0: 							  # If the flashlight is not on...
+					$Light2D.energy = 2.0
+					$Light2D.scale = Vector2(0.25, 0.25)
+					PlayerLightEnabled.isLightEnabled = true

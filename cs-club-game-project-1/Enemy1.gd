@@ -24,19 +24,21 @@ func _process(delta):
 	
 	if (is_in_light and 
 		PlayerLightEnabled.isLightEnabled and 
+		PlayerLightEnabled.hasFlashlight and 
 		health > 0
 		): 			# If enemy is in player's light and flashlight is on and the enemy's health is above 0...
 		health -= 1 # Decrement enemy health by 1.
 
-	if PlayerLightEnabled.isLightEnabled: # Move only when player's light is on.
-		if player.position.x > position.x:
-			position.x += 1
-		if player.position.x < position.x:
-			position.x -= 1
-		if player.position.y > position.y:
-			position.y += 1
-		if player.position.y < position.y:
-			position.y -= 1
+	if PlayerLightEnabled.hasFlashlight:
+		if PlayerLightEnabled.isLightEnabled: # Move only when player's light is on.
+			if player.position.x > position.x:
+				position.x += 1
+			if player.position.x < position.x:
+				position.x -= 1
+			if player.position.y > position.y:
+				position.y += 1
+			if player.position.y < position.y:
+				position.y -= 1
 
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta) # Collide with objects around enemy (e.g. walls).

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Flashlight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Bars.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy1.tscn" type="PackedScene" id=5]
 
 [node name="Level1" type="Node2D"]
 
@@ -484,3 +487,19 @@ position = Vector2( 3872, 224 )
 
 [node name="Wall159" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3872, 160 )
+
+[node name="Flashlight" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3232, 32 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Bars" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3872, -32 )
+
+[node name="Bars2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3872, 32 )
+
+[node name="Bars3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3872, 96 )
+
+[node name="Enemy1" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2720, -416 )
