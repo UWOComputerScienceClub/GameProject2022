@@ -9,7 +9,7 @@ var is_in_light = false
 
 var velocity = Vector2()
 onready var player = get_parent().get_node("Player")
-onready var playerLight = get_parent().get_node("Player/Light2D")
+onready var playerLight = get_parent().get_node("Player/Light2D/Area2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +22,12 @@ func _process(delta):
 	
 	$HealthDisplay.update_healthbar(health)
 	
+	if (playerLight.overlaps_body(self) and 
+		PlayerLightEnabled.isLightEnabled): # If this instance of Enemy2 is in the player's light and the light is on...
+		is_in_light = true
+	else:
+		is_in_light = false
+	
 	if (is_in_light and 
 		PlayerLightEnabled.isLightEnabled and 
 		PlayerLightEnabled.hasFlashlight and 
@@ -29,6 +35,9 @@ func _process(delta):
 		): 			# If enemy is in player's light and flashlight is on and the enemy's health is above 0...
 		health -= 1 # Decrement enemy health by 1.
 
+	if health == 0:
+		queue_free()
+		
 	if PlayerLightEnabled.hasFlashlight:
 		if PlayerLightEnabled.isLightEnabled: # Move only when player's light is on.
 			if player.position.x > position.x:
